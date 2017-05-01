@@ -1310,11 +1310,11 @@ function public_recips($msg) {
 	require_once('include/identity.php');
 
 	$check_mentions = false;
-	$include_sys = false;
+	$include_spam = false;
 
 	if($msg['message']['type'] === 'activity') {
 		if(! get_config('system','disable_discover_tab'))
-			$include_sys = true;
+			$include_spam = true;
 		$col = 'channel_w_stream';
 		$field = PERMS_W_STREAM;
 		if(array_key_exists('flags',$msg['message']) && in_array('thread_parent', $msg['message']['flags'])) {
@@ -1403,10 +1403,10 @@ function public_recips($msg) {
 
 	//logger('message: ' . print_r($msg['message'],true));
 
-	if($include_sys && array_key_exists('public_scope',$msg['message']) && $msg['message']['public_scope'] === 'public') {
-		$sys = get_sys_channel();
-		if($sys)
-			$r[] = array('hash' => $sys['channel_hash']);
+	if($include_spam && array_key_exists('public_scope',$msg['message']) && $msg['message']['public_scope'] === 'public') {
+		$spam = get_spam_channel();
+		if($spam)
+			$r[] = array('hash' => $spam['channel_hash']);
 	}
 
 	// look for any public mentions on this site

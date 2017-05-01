@@ -15,12 +15,12 @@ function diaspora_dispatch_public($msg) {
 		return;
 	}
 
-	$sys_disabled = true;
+	$spam_disabled = true;
 
 	if(! get_config('system','disable_discover_tab')) {
-		$sys_disabled = get_config('system','disable_diaspora_discover_tab');
+		$spam_disabled = get_config('system','disable_diaspora_discover_tab');
 	}
-	$sys = (($sys_disabled) ? null : get_sys_channel());
+	$spam = (($spam_disabled) ? null : get_spam_channel());
 
 	// find everybody following or allowing this author
 
@@ -38,14 +38,14 @@ function diaspora_dispatch_public($msg) {
 		}
 	}
 	else {
-		if(! $sys)
+		if(! $spam)
 			logger('diaspora_public: no subscribers');
 	}
 
-	if($sys) {
-		$sys['system'] = true;
-		logger('diaspora_public: delivering to sys.');
-		diaspora_dispatch($sys,$msg);
+	if($spam) {
+		$spam['system'] = true;
+		logger('diaspora_public: delivering to spam.');
+		diaspora_dispatch($spam,$msg);
 	}
 }
 
@@ -315,8 +315,8 @@ function diaspora_get_contact_by_handle($uid,$handle) {
 		return false;
 	require_once('include/identity.php');
 
-	$sys = get_sys_channel();
-	if(($sys) && ($sys['channel_id'] == $uid)) {
+	$spam = get_spam_channel();
+	if(($spam) && ($spam['channel_id'] == $uid)) {
 		$r = q("SELECT * FROM xchan where xchan_addr = '%s' limit 1",
 			dbesc($handle)
 		);

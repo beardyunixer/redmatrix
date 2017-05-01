@@ -72,10 +72,10 @@ function public_content(&$a, $update = 0, $load = false) {
 		$uids = " and item.uid in ( " . stream_perms_api_uids(PERMS_PUBLIC) . " ) and item_private = 0  and (item_flags & " . intval(ITEM_WALL) . " ) > 0 ";
 	}
 	else {
-		$sys = get_sys_channel();
-		$uids = " and item.uid  = " . intval($sys['channel_id']) . " ";
-		$sql_extra = item_permissions_sql($sys['channel_id']);
-		$a->data['firehose'] = intval($sys['channel_id']);
+		$spam = get_spam_channel();
+		$uids = " and item.uid  = " . intval($spam['channel_id']) . " ";
+		$sql_extra = item_permissions_sql($spam['channel_id']);
+		$a->data['firehose'] = intval($spam['channel_id']);
 	}
 
 

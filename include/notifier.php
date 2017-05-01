@@ -94,7 +94,7 @@ function notifier_run($argv, $argc){
 		return;
 
 	require_once('include/identity.php');
-	$sys = get_sys_channel();
+	$spam = get_spam_channel();
 
 	if($cmd == 'permission_update') {
 		// Get the recipient	
@@ -393,7 +393,7 @@ function notifier_run($argv, $argc){
 
 		// avoid looping of discover items 12/4/2014
 
-		if(($sys && $parent_item['uid'] == $sys['channel_id']) && (! parent_item['item_flags'] & ITEM_WALL))
+		if($spam && $parent_item['uid'] == $spam['channel_id'])
 			return;
 
 		$encoded_item = encode_item($target_item);

@@ -215,18 +215,18 @@ define ( 'CLIENT_MODE_UPDATE', 0x0002);
  *
  */
 
-define ( 'PAGE_NORMAL',            0x0000 );
-define ( 'PAGE_HIDDEN',            0x0001 );
-define ( 'PAGE_AUTOCONNECT',       0x0002 );
-define ( 'PAGE_APPLICATION',       0x0004 );
-define ( 'PAGE_ALLOWCODE',         0x0008 );
-define ( 'PAGE_PREMIUM',           0x0010 );
-define ( 'PAGE_ADULT',             0x0020 );
-define ( 'PAGE_CENSORED',          0x0040 ); // Site admin has blocked this channel from appearing in casual search results and site feeds
-define ( 'PAGE_SYSTEM',            0x1000 );
-define ( 'PAGE_HUBADMIN',          0x2000 ); // set this to indicate a preferred admin channel rather than the 
-											 // default channel of any accounts with the admin role.
-define ( 'PAGE_REMOVED',           0x8000 );
+define ( 'PAGE_NORMAL',					0x0000 );
+define ( 'PAGE_HIDDEN',					0x0001 );
+define ( 'PAGE_AUTOCONNECT',			0x0002 );
+define ( 'PAGE_APPLICATION',			0x0004 );
+define ( 'PAGE_ALLOWCODE',				0x0008 );
+define ( 'PAGE_PREMIUM',				0x0010 );
+define ( 'PAGE_ADULT',					0x0020 );
+define ( 'PAGE_CENSORED',				0x0040 ); // Site admin has blocked this channel from appearing in casual search results and site feeds
+define ( 'PAGE_SYSTEM',					0x1000 );
+define ( 'PAGE_HUBADMIN',				0x2000 ); // set this to indicate a preferred admin channel rather than the default channel of any accounts with the admin role.
+define ( 'PAGE_SPAM',					0x4000 );
+define ( 'PAGE_REMOVED',				0x8000 );
 
 
 /**
@@ -407,19 +407,20 @@ define ( 'VNOTIFY_REGISTER',   0x0400 );
 // Then we might have to revisit hubloc as a
 // linked structure between xchan and xsite
 
-define ( 'HUBLOC_FLAGS_PRIMARY',      0x0001);
-define ( 'HUBLOC_FLAGS_UNVERIFIED',   0x0002);
-define ( 'HUBLOC_FLAGS_ORPHANCHECK',  0x0004); 
-define ( 'HUBLOC_FLAGS_DELETED',      0x1000);
+define ( 'HUBLOC_FLAGS_PRIMARY',			0x0001);
+define ( 'HUBLOC_FLAGS_UNVERIFIED',		0x0002);
+define ( 'HUBLOC_FLAGS_ORPHANCHECK',	0x0004); 
+define ( 'HUBLOC_FLAGS_DELETED',			0x1000);
 
-define ( 'XCHAN_FLAGS_NORMAL',		  0x0000);
-define ( 'XCHAN_FLAGS_HIDDEN',        0x0001);
-define ( 'XCHAN_FLAGS_ORPHAN',        0x0002);
-define ( 'XCHAN_FLAGS_CENSORED',      0x0004);
-define ( 'XCHAN_FLAGS_SELFCENSORED',  0x0008);
-define ( 'XCHAN_FLAGS_SYSTEM',        0x0010);
-define ( 'XCHAN_FLAGS_PUBFORUM',      0x0020);
-define ( 'XCHAN_FLAGS_DELETED',       0x1000);
+define ( 'XCHAN_FLAGS_NORMAL',			0x0000);
+define ( 'XCHAN_FLAGS_HIDDEN',			0x0001);
+define ( 'XCHAN_FLAGS_ORPHAN',			0x0002);
+define ( 'XCHAN_FLAGS_CENSORED',			0x0004);
+define ( 'XCHAN_FLAGS_SELFCENSORED',	0x0008);
+define ( 'XCHAN_FLAGS_SYSTEM',			0x0010);
+define ( 'XCHAN_FLAGS_PUBFORUM',			0x0020);
+define ( 'XCHAN_FLAGS_SPAM',				0x0010);
+define ( 'XCHAN_FLAGS_DELETED',			0x1000);
 /*
  * Traficlights for Administration of HubLoc
  * to detect problems in inter server communication
@@ -1297,6 +1298,10 @@ function check_config(&$a) {
 	$syschan_exists = get_sys_channel();
 	if (! $syschan_exists)
 		create_sys_channel();
+
+	$spamchan_exists = get_spam_channel();
+	if (! $spamchan_exists)
+		create_spam_channel();
 
 	if($build != DB_UPDATE_VERSION) {
 		$stored = intval($build);

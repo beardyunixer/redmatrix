@@ -368,9 +368,9 @@ function network_content(&$a, $update = 0, $load = false) {
 
 	if($firehose && (! get_config('system','disable_discover_tab'))) {
 		require_once('include/identity.php');
-		$sys = get_sys_channel();
-		$uids = " and item.uid  = " . intval($sys['channel_id']) . " ";
-		$a->data['firehose'] = intval($sys['channel_id']);
+		$spam = get_spam_channel();
+		$uids = " and item.uid  = " . intval($spam['channel_id']) . " ";
+		$a->data['firehose'] = intval($spam['channel_id']);
 	}
 	else {
 		$uids = " and item.uid = " . local_user() . " ";

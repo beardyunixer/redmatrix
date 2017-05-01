@@ -468,8 +468,8 @@ function conversation(&$a, $items, $mode, $update, $page_mode = 'traditional', $
 	if (local_user())
 		$str_blocked = get_pconfig(local_user(),'system','blocked');
 	if (! local_user() && ($mode == 'network')) {
-		$sys = get_sys_channel();
-		$id = $sys['channel_id'];
+		$spam = get_spam_channel();
+		$id = $spam['channel_id'];
  		$str_blocked = get_pconfig($id,'system','blocked');
 	}
 
