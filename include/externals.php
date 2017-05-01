@@ -86,12 +86,12 @@ function externals_run($argv, $argc){
 
 				$j = json_decode($x['body'],true);
 				if($j['success'] && $j['messages']) {
-					$sys = get_sys_channel();
+					$spam = get_spam_channel();
 					foreach($j['messages'] as $message) {
 						// on these posts, clear any route info. 
 						$message['route'] = '';
 						$results = process_delivery(array('hash' => 'undefined'), get_item_elements($message),
-							array(array('hash' => $sys['xchan_hash'])), false, true);
+							array(array('hash' => $spam['xchan_hash'])), false, true);
 						$total ++;
 //						$z = q("select id from item where mid = '%s' and uid = %d limit 1",
 //							dbesc($message['message_id']),
@@ -109,7 +109,7 @@ $z = null;
     						$r = q("update item set item_flags = ( item_flags | %d ), owner_xchan = '%s' 
 								where id = %d",
 								intval($flag_bits),
-								dbesc($sys['xchan_hash']),
+								dbesc($spam['xchan_hash']),
 								intval($z[0]['id'])
 							);
 						}
