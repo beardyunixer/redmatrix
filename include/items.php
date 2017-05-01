@@ -4716,7 +4716,7 @@ function zot_feed($uid,$observer_hash,$arr) {
 		}
 	
 		$parents_str = ids_to_querystr($r,'parent');
-		$sys_query = ((is_sspam_channel($uid)) ? $sql_extra : '');
+		$sys_query = ((is_spam_channel($uid)) ? $sql_extra : '');
 
 		$items = q("SELECT `item`.*, `item`.`id` AS `item_id` FROM `item`
 			WHERE `item`.`item_restrict` = 0
