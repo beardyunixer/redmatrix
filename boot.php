@@ -419,7 +419,7 @@ define ( 'XCHAN_FLAGS_CENSORED',			0x0004);
 define ( 'XCHAN_FLAGS_SELFCENSORED',	0x0008);
 define ( 'XCHAN_FLAGS_SYSTEM',			0x0010);
 define ( 'XCHAN_FLAGS_PUBFORUM',			0x0020);
-define ( 'XCHAN_FLAGS_SPAM',				0x0010);
+define ( 'XCHAN_FLAGS_SPAM',				0x0040);
 define ( 'XCHAN_FLAGS_DELETED',			0x1000);
 /*
  * Traficlights for Administration of HubLoc
