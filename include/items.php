@@ -4663,7 +4663,7 @@ function zot_feed($uid,$observer_hash,$arr) {
 		return $result;
 	}
 
-	if(! is_sys_channel($uid))
+	if(! is_spam_channel($uid))
 		$sql_extra = item_permissions_sql($uid,$observer_hash);
 
 	$limit = " LIMIT 100 ";
@@ -4688,7 +4688,7 @@ function zot_feed($uid,$observer_hash,$arr) {
 		$groupby = 'GROUP BY parent';
 	}
 
-	if(is_sys_channel($uid)) {
+	if(is_spam_channel($uid)) {
 		$r = q("SELECT parent, created, postopts from item
 			WHERE uid != %d
 			AND item_private = 0 AND item_restrict = 0 AND uid in (" . stream_perms_api_uids(PERMS_PUBLIC,10,1) . ")
@@ -4716,7 +4716,7 @@ function zot_feed($uid,$observer_hash,$arr) {
 		}
 	
 		$parents_str = ids_to_querystr($r,'parent');
-		$sys_query = ((is_sys_channel($uid)) ? $sql_extra : '');
+		$sys_query = ((is_sspam_channel($uid)) ? $sql_extra : '');
 
 		$items = q("SELECT `item`.*, `item`.`id` AS `item_id` FROM `item`
 			WHERE `item`.`item_restrict` = 0
