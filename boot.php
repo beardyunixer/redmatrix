@@ -1793,6 +1793,11 @@ function current_theme(){
 			$page_theme = $r[0]['channel_theme'];
 	}
 
+	if((! $a->profile_uid) && (! local_user)) {
+			$sys = get_sys_chan();
+			$page_theme = $sys['channel_theme'];
+	}
+
 	if(array_key_exists('theme', $a->layout) && $a->layout['theme'])
 		$page_theme = $a->layout['theme'];
 
