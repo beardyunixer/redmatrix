@@ -393,7 +393,7 @@ function notifier_run($argv, $argc){
 
 		// avoid looping of discover items 12/4/2014
 
-		if($sys && $parent_item['uid'] == $sys['channel_id'])
+		if(($sys && $parent_item['uid'] == $sys['channel_id']) && (! parent_item['item_flags'] & ITEM_WALL))
 			return;
 
 		$encoded_item = encode_item($target_item);
