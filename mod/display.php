@@ -174,8 +174,8 @@ function display_content(&$a, $update = 0, $load = false) {
 			$r = null;
 
 			require_once('include/identity.php');
-			$sys = get_sys_channel();
-			$sysid = $sys['channel_id'];
+			$spam = get_spam_channel();
+			$spamid = $pam['channel_id'];
 
 			if(local_user()) {
 				$r = q("SELECT * from item
@@ -197,8 +197,8 @@ function display_content(&$a, $update = 0, $load = false) {
 				// in case somebody turned off public access to sys channel content using permissions
 				// make that content unsearchable by ensuring the owner_xchan can't match
 
-				if(! perm_is_allowed($sysid,$observer_hash,'view_stream'))
-					$sysid = 0;
+				if(! perm_is_allowed($spamid,$observer_hash,'view_stream'))
+					$spamid = 0;
 
 
 				$r = q("SELECT * from item
@@ -211,7 +211,7 @@ function display_content(&$a, $update = 0, $load = false) {
 					$sql_extra )
 					limit 1",
 					dbesc($target_item['parent_mid']),
-					intval($sysid)
+					intval($spamid)
 				);
 
 			}
