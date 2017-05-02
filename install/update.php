@@ -1,6 +1,6 @@
 <?php
 
-define( 'UPDATE_VERSION' , 1162 );
+define( 'UPDATE_VERSION' , 1163 );
 
 /**
  *
@@ -1806,3 +1806,52 @@ function update_r1161() {
 	return UPDATE_FAILED;
 }
 
+function update_r1162() {
+	$r = q("CREATE TABLE IF NOT EXISTS `webpages` (
+ 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  	`uid` int(10) unsigned NOT NULL DEFAULT '0',
+  	`created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	`edited` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	`comments_closed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	`owner_xchan` char(255) NOT NULL DEFAULT '',
+  	`author_xchan` char(255) NOT NULL DEFAULT '',
+  	`mimetype` char(255) NOT NULL DEFAULT '',
+  	`title` text NOT NULL,
+  	`body` mediumtext NOT NULL, 
+  	`lang` char(64) NOT NULL DEFAULT '',
+  	`revision` int(10) unsigned NOT NULL DEFAULT '0',
+  	`layout_mid` char(255) NOT NULL DEFAULT '',
+  	`location` char(255) NOT NULL DEFAULT '',
+  	`comment_policy` char(255) NOT NULL DEFAULT '',
+  	`allow_cid` mediumtext NOT NULL,
+  	`allow_gid` mediumtext NOT NULL,
+  	`deny_cid` mediumtext NOT NULL,
+  	`deny_gid` mediumtext NOT NULL,
+  	`item_private` tinyint(4) NOT NULL DEFAULT '0',
+  	PRIMARY KEY (`id`),
+  	KEY `uid` (`uid`),
+  	KEY `created` (`created`),
+  	KEY `edited` (`edited`),
+  	KEY `uid_created` (`uid`,`created`),
+  	KEY `owner_xchan` (`owner_xchan`),
+  	KEY `author_xchan` (`author_xchan`),
+  	KEY `item_private` (`item_private`),
+	KEY `lang` (`lang`),
+	KEY `location` (`location`),
+  	KEY `revision` (`revision`),
+  	KEY `mimetype` (`mimetype`),
+  	KEY `comment_policy` (`comment_policy`),
+  	KEY `layout_mid` (`layout_mid`),
+  	KEY `comments_closed` (`comments_closed`),
+  	FULLTEXT KEY `title` (`title`),
+  	FULLTEXT KEY `body` (`body`),
+  	FULLTEXT KEY `allow_cid` (`allow_cid`),
+  	FULLTEXT KEY `allow_gid` (`allow_gid`),
+  	FULLTEXT KEY `deny_cid` (`deny_cid`),
+  	FULLTEXT KEY `deny_gid` (`deny_gid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
+
+	if($r)
+		return UPDATE_SUCCESS;
+	return UPDATE_FAILED;
+}
