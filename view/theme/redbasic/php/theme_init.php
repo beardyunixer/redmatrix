@@ -1,7 +1,7 @@
 <?php
 
-head_add_css('view/theme/redbasic/library/font_awesome/css/font-awesome.min.css');
-head_add_css('view/theme/redbasic/libary/bootstrap/css/bootstrap.min.css');
+head_add_css('view/theme/redbasic/library/css/font-awesome.min.css');
+head_add_css('view/theme/redbasic/library/bootstrap/css/bootstrap.min.css');
 head_add_css('library/bootstrap-tagsinput/bootstrap-tagsinput.css');
 head_add_css('view/theme/redbasic/css/bootstrap-red.css');
 head_add_css('library/datetimepicker/jquery.datetimepicker.css');
