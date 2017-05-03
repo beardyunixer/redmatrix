@@ -20,8 +20,6 @@
 
 [li]Get rid of the item table.  Bitwise operators don't work, and item is 90% social at present.  Thus, it's easier to create a new table than fix the old one.[/li]
 
-[li]Fix the null date crap[/li]
-
 [li]Implement oauth, indieauth, and oid connect[/li]
 
 [li]Replace old permissions with site permissions, but stop calling them site permissions[/li]
