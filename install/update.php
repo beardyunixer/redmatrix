@@ -1857,9 +1857,9 @@ function update_r1162() {
 }
 
 function update_r1163() {
-	$r  = q("alter webpages add excerpt after body text NOT NULL");
-	$r2  = q("alter webpages add status tiny_int ( 3 ) NOT NULL default 0");
-	$r3 = q("alter table webpages add index ( excerpt ), add index ( status ) ");
+	$r  = q("alter table `webpages` add `excerpt` text NOT NULL after `body`");
+	$r2  = q("alter table `webpages` add `status` tinyint ( 3 ) NOT NULL default 0");
+	$r3 = q("alter table `webpages` add index ( `status` ) ");
 	if($r && $r2 && $r3)
 		return UPDATE_SUCCESS;
 	return UPDATE_FAILED;
