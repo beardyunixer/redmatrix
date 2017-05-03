@@ -1,6 +1,6 @@
 <?php
 
-define( 'UPDATE_VERSION' , 1163 );
+define( 'UPDATE_VERSION' , 1164 );
 
 /**
  *
@@ -1852,6 +1852,15 @@ function update_r1162() {
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 	if($r)
+		return UPDATE_SUCCESS;
+	return UPDATE_FAILED;
+}
+
+function update_r1163() {
+	$r  = q("alter webpages add excerpt after body text NOT NULL");
+	$r2  = q("alter webpages add status tiny_int ( 3 ) NOT NULL default 0");
+	$r3 = q("alter table webpages add index ( excerpt ), add index ( status ) ");
+	if($r && $r2 && $r3)
 		return UPDATE_SUCCESS;
 	return UPDATE_FAILED;
 }

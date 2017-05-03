@@ -1,5 +1,7 @@
 [b]Project Code To-Do List[/b]
 
+[li]Get rid of markdown.  It's got more holes than a round of golf.[/li]
+
 [li]Get rid of social.  Remove the channel module entirely.  Remove the network module entirely.  Get rid of discovery (note it's useful now for collecting Diaspora addresses, if we can convince them to ping a directory, we don't need this at all)[/li].
 
 [li]Implement xmlrpc to give us access to WordPress clients[/li]
