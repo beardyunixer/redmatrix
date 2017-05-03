@@ -246,7 +246,7 @@ function dbunescbin($str) {
 function dbescdate($date) {
 	//Really not sure about this...If everything sets on fire, this is probably
 	//where and why.
-	if(($date === '0000-00-00 00:00:00') || ($date === '0001-01-01 00:00:00')) {
+	if(($date === '0000-00-00 00:00:00') || ($date === '0001-01-01 00:00:00'))
 		return $dba->escape(NULL_DATE);
 	return $dba->escape($date);
 }
@@ -351,7 +351,7 @@ function dbq($sql) {
 
 function dbesc_array_cb(&$item, $key) {
 	if(is_string($item)) {
-		if($item == '0000-00-00 00:00:00') || ($item == '0001-01-01 00:00:00')
+		if(($item == '0000-00-00 00:00:00') || ($item == '0001-01-01 00:00:00'))
 			$item = NULL_DATE;
 		$item = dbesc($item);
 	}
