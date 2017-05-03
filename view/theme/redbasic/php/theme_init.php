@@ -1,7 +1,7 @@
 <?php
 
-head_add_css('library/font_awesome/css/font-awesome.min.css');
-head_add_css('library/bootstrap/css/bootstrap.min.css');
+head_add_css('view/theme/redbasic/library/font_awesome/css/font-awesome.min.css');
+head_add_css('view/theme/redbasic/libary/bootstrap/css/bootstrap.min.css');
 head_add_css('library/bootstrap-tagsinput/bootstrap-tagsinput.css');
 head_add_css('view/theme/redbasic/css/bootstrap-red.css');
 head_add_css('library/datetimepicker/jquery.datetimepicker.css');
@@ -52,7 +52,7 @@ head_add_js('library/colorbox/jquery.colorbox-min.js');
 head_add_js('library/jquery.AreYouSure/jquery.are-you-sure.js');
 head_add_js('library/tableofcontents/jquery.toc.js');
 
-head_add_js('library/bootstrap/js/bootstrap.min.js');
+head_add_js('view/theme/redbasic/library/bootstrap/js/bootstrap.min.js');
 head_add_js('library/bootbox/bootbox.min.js');
 head_add_js('library/bootstrap-tagsinput/bootstrap-tagsinput.js');
 head_add_js('library/datetimepicker/jquery.datetimepicker.js');

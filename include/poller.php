@@ -50,14 +50,14 @@ function poller_run($argv, $argc){
 
 	// expire any expired mail
 
-	q("delete from mail where expires != '%s' and expires < %s ",
+	q("delete from mail where expires > '%s' and expires < %s ",
 		dbesc(NULL_DATE),
 		db_utcnow()
 	);
 
 	// expire any expired items
 
-	$r = q("select id from item where expires != '%s' and expires < %s 
+	$r = q("select id from item where expires > '%s' and expires < %s 
 		and ( item_restrict & %d ) = 0 ",
 		dbesc(NULL_DATE),
 		db_utcnow(),
@@ -376,7 +376,7 @@ function poller_run($argv, $argc){
 
 				// if we've never connected with them, start the mark for death countdown from now
 
-				if($c == NULL_DATE) {
+				if($c <= NULL_DATE) {
 					$r = q("update abook set abook_connected = '%s'  where abook_id = %d",
 						dbesc(datetime_convert()),
 						intval($contact['abook_id'])
@@ -431,7 +431,7 @@ function poller_run($argv, $argc){
 	}
 
 	if($dirmode == DIRECTORY_MODE_SECONDARY || $dirmode == DIRECTORY_MODE_PRIMARY) {
-		$r = q("SELECT u.ud_addr, u.ud_id, u.ud_last FROM updates AS u INNER JOIN (SELECT ud_addr, max(ud_id) AS ud_id FROM updates WHERE ( ud_flags & %d ) = 0 AND ud_addr != '' AND ( ud_last = '%s' OR ud_last > %s - INTERVAL %s ) GROUP BY ud_addr) AS s ON s.ud_id = u.ud_id ",
+		$r = q("SELECT u.ud_addr, u.ud_id, u.ud_last FROM updates AS u INNER JOIN (SELECT ud_addr, max(ud_id) AS ud_id FROM updates WHERE ( ud_flags & %d ) = 0 AND ud_addr != '' AND ( ud_last <= '%s' OR ud_last > %s - INTERVAL %s ) GROUP BY ud_addr) AS s ON s.ud_id = u.ud_id ",
 			intval(UPDATE_FLAGS_UPDATED),
 			dbesc(NULL_DATE),
 			db_utcnow(), db_quoteinterval('7 DAY')
@@ -442,7 +442,7 @@ function poller_run($argv, $argc){
 				// If they didn't respond when we attempted before, back off to once a day
 				// After 7 days we won't bother anymore
 
-				if($rr['ud_last'] != NULL_DATE)
+				if($rr['ud_last'] > NULL_DATE)
 					if($rr['ud_last'] > datetime_convert('UTC','UTC', 'now - 1 day'))
 						continue;
 				proc_run('php','include/onedirsync.php',$rr['ud_id']);
