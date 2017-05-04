@@ -78,9 +78,7 @@ EOT;
 	$userinfo = null;
 	$nav['loginmenu']=array();
 
-	if(local_user()) {
-
-
+	if (local_user()) {
 		if($chans && count($chans) > 1 && feature_enabled(local_user(),'nav_channel_select'))
 			$nav['channels'] = $chans;
 
@@ -174,7 +172,7 @@ EOT;
 	 *
 	 */
 
-	if(local_user()) {
+	if((local_user()) && (get_pconfig(local_user(),'social','enabled'))) {
 
 	
 		$nav['network'] = array('network', t('Matrix'), "", t('Your matrix'),'network_nav_btn');
