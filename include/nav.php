@@ -172,6 +172,24 @@ EOT;
 	 *
 	 */
 
+	if(local_user()) {
+		$nav['messages'] = array('message', t('Mail'), "", t('Private mail'),'mail_nav_btn');
+		$nav['messages']['all']=array('message', t('See all private messages'), "", "");
+		$nav['messages']['mark'] = array('', t('Mark all private messages seen'), '','');
+		$nav['messages']['inbox'] = array('message', t('Inbox'), "", t('Inbox'));
+		$nav['messages']['outbox']= array('message/sent', t('Outbox'), "", t('Outbox'));
+		$nav['messages']['new'] = array('mail/new', t('New Message'), "", t('New Message'));
+
+		$nav['all_events'] = array('events', t('Events'), "", t('Event Calendar'),'events_nav_btn');
+		$nav['all_events']['all']=array('events', t('See all events'), "", "");
+		$nav['all_events']['mark'] = array('', t('Mark all events seen'), '','');
+		
+		$nav['manage'] = array('manage', t('Channel Manager'), "", t('Manage Your Channels'),'manage_nav_btn');
+
+		$nav['settings'] = array('settings', t('Settings'),"", t('Account/Channel Settings'),'settings_nav_btn');
+
+}
+	
 	if((local_user()) && (get_pconfig(local_user(),'social','enabled'))) {
 
 	
@@ -184,26 +202,9 @@ EOT;
 
 		$nav['intros'] = array('connections/ifpending',	t('Connections'), "", t('Connections'),'connections_nav_btn');
 
-
 		$nav['notifications'] = array('notifications/system',	t('Notices'), "", t('Notifications'),'notifications_nav_btn');
 		$nav['notifications']['all']=array('notifications/system', t('See all notifications'), "", "");
 		$nav['notifications']['mark'] = array('', t('Mark all system notifications seen'), '','');
-
-		$nav['messages'] = array('message', t('Mail'), "", t('Private mail'),'mail_nav_btn');
-		$nav['messages']['all']=array('message', t('See all private messages'), "", "");
-		$nav['messages']['mark'] = array('', t('Mark all private messages seen'), '','');
-		$nav['messages']['inbox'] = array('message', t('Inbox'), "", t('Inbox'));
-		$nav['messages']['outbox']= array('message/sent', t('Outbox'), "", t('Outbox'));
-		$nav['messages']['new'] = array('mail/new', t('New Message'), "", t('New Message'));
-
-
-		$nav['all_events'] = array('events', t('Events'), "", t('Event Calendar'),'events_nav_btn');
-		$nav['all_events']['all']=array('events', t('See all events'), "", "");
-		$nav['all_events']['mark'] = array('', t('Mark all events seen'), '','');
-		
-		$nav['manage'] = array('manage', t('Channel Manager'), "", t('Manage Your Channels'),'manage_nav_btn');
-
-		$nav['settings'] = array('settings', t('Settings'),"", t('Account/Channel Settings'),'settings_nav_btn');
 
 	}
 
